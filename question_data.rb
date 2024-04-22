@@ -1,3 +1,7 @@
+require 'yaml'
+require 'json'
+require 'thread'
+
 module Quiz
     class QuestionData
         attr_accessor :collection
@@ -15,17 +19,18 @@ module Quiz
             @collection.map(&:to_h).to_yaml
         end
 
-        def save_to_yaml(filename = 'questions_output.yaml')
-            File.write(prepare_filename(filename), to_yaml)
-        end
-
         def to_json
             JSON.pretty_generate(@collection.map(&:to_h))
+        end
+
+        def save_to_yaml(filename = 'questions_output.yaml')
+            File.write(prepare_filename(filename), to_yaml)
         end
 
         def save_to_json(filename = 'questions_output.json')
             File.write(prepare_filename(filename), to_json)
         end
+
 
         def prepare_filename(filename)
             File.expand_path(filename, __dir__)
@@ -56,4 +61,3 @@ module Quiz
         end
     end
 end
-
