@@ -39,7 +39,7 @@ module Quiz
     def get_answer_by_char(question)
       answer = nil
       until answer
-        char = @input_reader.read(welcome_message: "Enter your answer [A, B, C, D]:", error_message: "Please enter a valid letter.", validator: ->(input) { ('A'..'D').include?(input.upcase) && !input.empty? }).upcase
+        char = @input_reader.read(welcome_message: "Enter your answer [A, B, C, D, E]:", error_message: "Please enter a valid letter.", validator: ->(input) { ('A'..'E').include?(input.upcase) && !input.empty? }).upcase
         answer = question.find_answer_by_char(char)
       end
       [answer, char]
